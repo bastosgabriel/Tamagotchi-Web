@@ -34,6 +34,12 @@ class TamagotchiModel(db.Model):
     def find_by_name(self, name):
         return TamagotchiModel.query.filter_by(name=name).first()
 
+    '''
+    Saves model to db
+    '''
+    def save_to_db(self):
+        db.session.add(self)
+        db.session.commit()
 
     '''
     Increases tamagotchi's love bar on the database
@@ -44,9 +50,7 @@ class TamagotchiModel(db.Model):
         tamagotchi = TamagotchiModel.query.filter_by(name=name).first()
         tamagotchi.love += 10
 
-        db.session.add(self)
-        db.session.commit()
-        
+        TamagotchiModel.save_to_db()
 
     '''
     Decreases the hunger bar

@@ -6,11 +6,3 @@ class tamagotchiTest(TestCase):
         pass
 
     pass
-
-
-class itemTest(TestCase):
-    def test_snack(self):
-        pass
-    
-
-    pass

@@ -1,0 +1,2 @@
+class Tamagotchi():
+    pass

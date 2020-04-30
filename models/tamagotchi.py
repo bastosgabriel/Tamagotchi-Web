@@ -1,6 +1,5 @@
 from flask_sqlalchemy import SQLAlchemy
-
-db = SQLAlchemy()
+from db import db
 
 class TamagotchiModel(db.Model):
     __tablename__ = 'tamagotchis'
@@ -31,7 +30,8 @@ class TamagotchiModel(db.Model):
     '''
     Search for a tamagotchi with the given name on the database
     '''
-    def find_by_name(self, name):
+    @staticmethod
+    def find_by_name(name):
         return TamagotchiModel.query.filter_by(name=name).first()
 
     '''
@@ -45,7 +45,7 @@ class TamagotchiModel(db.Model):
     Increases tamagotchi's love bar on the database
     '''
     @staticmethod
-    def cuddle(self, name):
+    def cuddle(name):
 
         tamagotchi = TamagotchiModel.query.filter_by(name=name).first()
         tamagotchi.love += 10
@@ -56,7 +56,7 @@ class TamagotchiModel(db.Model):
     Decreases the hunger bar
     '''
     @staticmethod
-    def feed(self):
+    def feed(name):
         pass
 
 

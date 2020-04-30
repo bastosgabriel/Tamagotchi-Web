@@ -9,9 +9,9 @@ class TamagotchiCreate(Resource):
                             required=True,
                             help="This field is required"
                             )
-    
+        
     def post(self):
-        data = tamagotchi_parser.parse_args()
+        data = TamagotchiCreate.tamagotchi_parser.parse_args()
         tamagotchi = TamagotchiModel(**data)
 
         if TamagotchiModel.find_by_name(tamagotchi['name']):
@@ -34,7 +34,6 @@ class Tamagotchi(Resource):
                         help="This field is required"
                         )
 
-    
     def get(self, name):
         if TamagotchiModel.find_by_name(name):
             return {TamagotchiModel.find_by_name(name).json("Such a beaultiful creature (/ =ω=)/")}

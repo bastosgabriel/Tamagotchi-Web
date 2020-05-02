@@ -9,6 +9,7 @@ class TestTamagotchi(TestCase):
             response = c.post('/tamagotchi', data=dict(name='TestName'))
 
             self.assertEqual(response.status_code, 201)
+            self.assertEqual(json.loads(response.get_data()), {"message": "TestName was born! ( ͡ᵔ ͜ʖ ͡ᵔ)"})
     
     def test_get_tamagotchi(self):
         with app.test_client() as c:

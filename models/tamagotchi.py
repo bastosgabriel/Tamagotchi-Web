@@ -33,6 +33,7 @@ class TamagotchiModel(db.Model):
     @staticmethod
     def find_by_name(name):
         return TamagotchiModel.query.filter_by(name=name).first()
+        
 
     '''
     Saves model to db
@@ -44,13 +45,9 @@ class TamagotchiModel(db.Model):
     '''
     Increases tamagotchi's love bar on the database
     '''
-    @staticmethod
-    def cuddle(name):
+    def cuddle(self):
+        self.love += 20
 
-        tamagotchi = TamagotchiModel.query.filter_by(name=name).first()
-        tamagotchi.love += 10
-
-        TamagotchiModel.save_to_db()
 
     '''
     Decreases the hunger bar

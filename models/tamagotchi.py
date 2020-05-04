@@ -20,15 +20,16 @@ class TamagotchiModel(db.Model):
     Returns tamagotchi attributes in json format
     '''
     def json(self, message=""):
-        return {"name": self.name, 
-                "love": self.love, 
-                "hunger": self.hunger, 
-                "hp": self.hp,
-                "message": message
-                }
+        return {
+            "name": self.name, 
+            "love": self.love, 
+            "hunger": self.hunger, 
+            "hp": self.hp,
+            "message": message
+        }
 
     '''
-    Search for a tamagotchi with the given name on the database
+    Search for a tamagotchi with the given name in the database
     '''
     @staticmethod
     def find_by_name(name):
@@ -43,18 +44,28 @@ class TamagotchiModel(db.Model):
         db.session.commit()
 
     '''
-    Increases tamagotchi's love bar on the database
+    Deletes model from db
+    '''
+    def delete_from_db(self):
+        db.session.delete(self)
+        db.session.commit()
+
+    '''
+    Increases tamagotchi's love bar
     '''
     def cuddle(self):
         self.love += 20
+        if self.love > 100:
+            self.love = 100
 
 
     '''
     Decreases the hunger bar
     '''
-    @staticmethod
-    def feed(name):
-        pass
+    def feed(self):
+        self.hunger -= 20
+        if self.hunger < 0:
+            self.hunger = 0
 
 
 
